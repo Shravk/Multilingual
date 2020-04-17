@@ -1,0 +1,59 @@
+<p>Enter chat and press enter.</p>
+
+<form>
+  <label htmlFor="inputLan">Select Input Language:</label>
+  <select id="inputLan">
+    <option value="fr">French</option>
+    <option value="es">Spanish</option>
+    <option value="en">English</option>
+    <option value="zh">Chinese</option>
+    <option value="ar">Arabic</option>
+    <option value="nl">Dutch</option>
+    <option value="de">German</option>
+    <option value="it">Italian</option>
+    <option value="ja">Japanese</option>
+    <option value="ko">Korean</option>
+  </select>
+  <label htmlFor="outputLan">Select Output Language:</label>
+  <select id="outputLan">
+      <option value="fr">French</option>
+      <option value="es">Spanish</option>
+      <option value="en">English</option>
+      <option value="zh">Chinese</option>
+      <option value="ar">Arabic</option>
+      <option value="nl">Dutch</option>
+      <option value="de">German</option>
+      <option value="it">Italian</option>
+      <option value="ja">Japanese</option>
+      <option value="ko">Korean</option>
+    </select>
+  <br><br> 
+</form>
+<input id="input" placeholder="Your Message Here"/>
+<p>Chat Output:<p>
+<div id="box"></div>
+<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.23.0.min.js"></script>
+(function(){
+  var pubnub = new PubNub({publishKey : 'Enter your publish key', subscribeKey : 'Enter your subscribe key'}); // Your PubNub keys here. Get them from https://dashboard.pubnub.com.
+  var box = document.getElementById("box"), 
+  input = document.getElementById("input"), 
+  inputLanguage = document.getElementById("inputLan");
+  outputLanguage = document.getElementById("outputLan");
+  channels = ['demo'];
+  pubnub.subscribe({channels: channels}); // Subscribe to a channel.
+  pubnub.addListener({message: function(m) {
+    console.log(m);
+         box.innerHTML = (''+m.message.text).replace( /[<>]/g, '' ) + '<br>' + box.innerHTML; // Add message to page.
+    }});
+  input.addEventListener('keypress', function (e) {
+      (e.keyCode || e.charCode) === 13 && pubnub.publish({ // Publish new message when enter is pressed. 
+          channel : channels[0],
+          message : {
+            text: input.value,
+            inp: inputLanguage.value,
+            opt: outputLanguage.value, 
+          },
+          x : (input.value='')
+      });
+  });
+})();</script>
