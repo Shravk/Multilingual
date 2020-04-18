@@ -36,20 +36,9 @@
 <div id="box"></div>
 <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.23.0.min.js"></script>
 <script>
-  // let inputLanguage, outputLanguage;
-  // function submitForm() {
-  //   var inp = document.getElementById("inputLan");
-  //   inputLanguage = inp.options[inp.selectedIndex].value;
-
-  //   var opt = document.getElementById("outputLan");
-  //   outputLanguage = opt.options[opt.selectedIndex].value;
-  //   // alert(inputLanguage + "-" + outputLanguage);
-  //   return inputLanguage, outputLanguage;
-  // }
-  // console.log(inputLanguage, outputLanguage);
 
 (function(){
-  var pubnub = new PubNub({publishKey : 'pub-c-397ff3e6-1435-4b3e-bb55-9b68bd978c23', subscribeKey : 'sub-c-ba1bd6fa-80b4-11ea-8dff-bafe0457d467'}); // Your PubNub keys here. Get them from https://dashboard.pubnub.com.
+  var pubnub = new PubNub({publishKey : 'Enter Your Publish Key', subscribeKey : 'Enter Your Subscribe Key'}); // Your PubNub keys here. Get them from https://dashboard.pubnub.com.
   var box = document.getElementById("box"), 
   input = document.getElementById("input"), 
   inputLanguage = document.getElementById("inputLan");
